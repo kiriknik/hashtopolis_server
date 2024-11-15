@@ -108,7 +108,7 @@ if (isset($_GET['id'])) {
   UI::add('currentSpeed', $currentSpeed);
   
   $agentsBench = new DataSet();
-  $qF = new QueryFilter(Assignment::TASK_ID, $task->getId(), "=");
+  $qF = new QueryFilter(Assignment::  , $task->getId(), "=");
   $assignments = Factory::getAssignmentFactory()->filter([Factory::FILTER => $qF]);
   foreach ($assignments as $assignment) {
     $agentsBench->addValue($assignment->getAgentId(), $assignment->getBenchmark());
@@ -421,6 +421,26 @@ else {
   AccessControl::getInstance()->checkPermission(DViewControl::TASKS_VIEW_PERM);
   UI::add('showArchived', false);
   UI::add('pageTitle', "Tasks");
+
+  $qF = new QueryFilter(Assignment::TASK_ID,0,'>');
+  $assignment = Factory::getAssignmentFactory()->filter([Factory::FILTER => $qF], true);
+
+  if(!empty($assignment))
+  {
+    $task = Factory::getTaskFactory()->get($assignment->getTaskId());
+    $keyspaceProgress=$task->getKeyspaceProgress();
+    $keyspace=$task->getKeyspace();
+    if ($keyspace===$keyspaceProgress){
+            $status="bruted";       
+    }
+    else {
+            $status="in brute";
+    }
+    $taskWrapper = Factory::getTaskWrapperFactory()->get($task->getTaskWrapperId());
+    UI::add('GroupName',Factory::getAccessGroupFactory()->get($taskWrapper->getAccessGroupId())->getGroupName());
+    UI::add('Status',$status);
+    UI::add('TaskID',$assignment->getTaskId());
+  }
   if (isset($_GET['archived']) && $_GET['archived'] == 'true') {
     Util::loadTasks(true);
     UI::add('showArchived', true);

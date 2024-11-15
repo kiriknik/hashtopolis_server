@@ -1,5 +1,7 @@
 {%TEMPLATE->struct/head%}
 {%TEMPLATE->struct/menu%}
+<h2>{{IF [[GroupName]]}} [[GroupName]] [[Status]] with taskID:[[TaskID]]{{ENDIF}}</h2>
+
 <h2>{{IF [[showArchived]]}}Archived {{ENDIF}}Tasks ([[sizeof([[taskList]])]])</h2>
 {%TEMPLATE->struct/messages%}
 <div style='overflow: auto;'>
@@ -25,6 +27,7 @@
 	{%TEMPLATE->tasks/autorefresh%}
 	<br>
 </div>
+
 <div class="card">
   <div class="table-responsive">
     <table class="table table-bordered table-sm" id="tasks">
