@@ -108,7 +108,7 @@ if (isset($_GET['id'])) {
   UI::add('currentSpeed', $currentSpeed);
   
   $agentsBench = new DataSet();
-  $qF = new QueryFilter(Assignment::  , $task->getId(), "=");
+  $qF = new QueryFilter(Assignment::TASK_ID, $task->getId(), "=");
   $assignments = Factory::getAssignmentFactory()->filter([Factory::FILTER => $qF]);
   foreach ($assignments as $assignment) {
     $agentsBench->addValue($assignment->getAgentId(), $assignment->getBenchmark());
