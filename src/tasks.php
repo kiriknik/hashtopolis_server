@@ -428,6 +428,7 @@ else {
   if(!empty($assignment))
   {
     $task = Factory::getTaskFactory()->get($assignment->getTaskId());
+    $priority=$task->getPriority();
     $keyspaceProgress=$task->getKeyspaceProgress();
     $keyspace=$task->getKeyspace();
     if ($keyspace===$keyspaceProgress){
@@ -440,6 +441,7 @@ else {
     UI::add('GroupName',Factory::getAccessGroupFactory()->get($taskWrapper->getAccessGroupId())->getGroupName());
     UI::add('Status',$status);
     UI::add('TaskID',$assignment->getTaskId());
+    UI::add('Priority',$priority);
   }
   if (isset($_GET['archived']) && $_GET['archived'] == 'true') {
     Util::loadTasks(true);
