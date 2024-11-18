@@ -70,9 +70,9 @@ if (isset($_GET['id'])) {
   UI::add('taskWrapper', $taskWrapper);
   
   $fileInfo = Util::getFileInfo($task, AccessUtils::getAccessGroupsOfUser(Login::getInstance()->getUser()));
-  if ($fileInfo[4]) {
-    UI::printError("ERROR", "No access to this task!");
-  }
+  //if ($fileInfo[4]) {
+  //  UI::printError("ERROR", "No access to this task!");
+  //}
   
   $hashlist = Factory::getHashlistFactory()->get($taskWrapper->getHashlistId());
   if (!AccessUtils::userCanAccessHashlists($hashlist, Login::getInstance()->getUser())) {
