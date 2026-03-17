@@ -6,7 +6,7 @@ RUN cd / && git rev-parse --short HEAD > /HEAD; exit 0
 
 # BASE image
 # ----BEGIN----
-FROM php:8-apache as hashtopolis-server-base
+FROM php:8.5-apache AS hashtopolis-server-base
 
 # Enable possible build args for injecting user commands
 ARG CONTAINER_USER_CMD_PRE
